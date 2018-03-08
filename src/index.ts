@@ -38,7 +38,7 @@ function create(
   return Promise.all(p)
 }
 
-function FileToData(file: File): Promise<Blob> {
+export function FileToData(file: File): Promise<Blob> {
   const name = file.name
   const type = ImageType.jpg
   const quority = 1
@@ -49,7 +49,7 @@ function FileToData(file: File): Promise<Blob> {
     })
 }
 
-function getData(file: File): Promise<string> {
+export function getData(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onload = () => {
@@ -59,7 +59,7 @@ function getData(file: File): Promise<string> {
   })
 }
 
-function getBloB(
+export function getBloB(
   data: string,
   type: string = ImageType.jpg,
   quority: number = 1
@@ -74,11 +74,13 @@ function getBloB(
   })
 }
 
-function imgToCanvas(img: HTMLImageElement): HTMLCanvasElement {
+export function imgToCanvas(img: HTMLImageElement): HTMLCanvasElement {
   const canvas = document.createElement('canvas')
-  const ctx = canvas.getContext("2d")
-  const width = 100
-  const height = 100
+  const ctx = canvas.getContext('2d')
+  const width = img.width
+  const height = img.height
+  canvas.width = width
+  canvas.height = height
   ctx.drawImage(img, 0, 0, width, height)
   return canvas
 }
