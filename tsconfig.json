@@ -4,7 +4,7 @@
     "target": "es5",
     "lib": [
       "es6",
-      "dom"
+      "dom",
     ],
     "noImplicitAny": true,
     "removeComments": true,
