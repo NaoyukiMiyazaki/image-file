@@ -1,0 +1,37 @@
+{
+  "name": "image-resize",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npm run rmrf && rollup -c -w",
+    "dev": "php -S localhost:3000",
+    "test": "jest",
+    "build": "npm run rmrf && TASK=build rollup -c && rollup -c",
+    "rmrf": "rm -rf dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^22.2.0",
+    "jest": "^22.4.2",
+    "rollup": "^0.56.4",
+    "rollup-plugin-typescript2": "^0.12.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "rollup-watch": "^4.3.1",
+    "ts-jest": "^22.4.1",
+    "typescript": "^2.7.2"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="./form.php" method="post" enctype="multipart/form-data">
+        <legend>normal</legend>
+        <input type="file" name="sample_image[]" multiple>
+        <input type="submit" value="submit">
+    </form>
+    <form id="form" action="./form.php" method="post" enctype="multipart/form-data">
+        <legend>image resize</legend>
+        <input type="text" name="name" value="your name">
+        <input type="file" name="sample_image[]" multiple>
+        <input type="submit" value="submit">
+    </form>
+    <script src="./dist/image-file.js"></script>
+    <script>
+        (() => {
+            const form = document.getElementById('form')
+            const input = document.querySelector('#form input[type="file"]')
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+
+                const formData = new FormData(form)
+                formData.delete(input.name)
+
+                ImageFile.create(input)
+                    .then((files) => {
+                        for (let blob of files) {
+                            formData.append(input.name, blob)
+                        }
+                        return formData
+                    })
+                    .then((formData) => {
+                        fetch(form.action, {
+                            body: formData,
+                            method: form.method
+                        }).then((res) => {
+                            console.log(res)
+                        })
+                    });
+
+                return false
+            })
+        })();
+    </script>
+</body>
+</html>
